@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<style>
+    table,
+    th,
+    td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+    th,
+    td {
+        padding: 5px;
+    }
+ 
+    button{
+    background-color: lightgreen;
+     font-size: 20px;
+
+
+  }
+
+  body{
+      background-color: rgb(204, 107, 74);
+  }
+  ul{
+     
+   font-size: 25px;
+   float: right;
+   margin-top:90px ;
+   margin-left:100px ;
+   
+     
+  }
+
+  img{
+      margin-top: 5px;
+      padding-left: 200px;
+      height: 350px;
+      
+  }
+  button:hover {
+  background-color: #025346;
+  color: rgb(226, 218, 218);
+}
+
+
+
+
+
+</style>
+<body>
+    <h2>GitHub User:</h2>
+    <div id="myId"></div>
+    <button type="button" class="" onclick="loadDoc()">Load github users</button>
+    <br /><br />
+    <table id="demo"></table>
+    <script>
+        function loadDoc() {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "https://api.github.com/users");
+            xhr.send();
+            xhr.onload = function() {
+                const data = xhr.response;
+                var people = JSON.parse(data);
+                var output = ' ';
+                for (var i = 0; i < 10; i++)
+                 {
+
+                    output +=
+                        '<div>' + '<img src="' + people[i].avatar_url + '" width="some value" height="some value">'  +
+                        '<ul>' +
+                        '<li>ID: ' + people[i].id + '</li>' +
+                        '<li>Type: ' + people[i].type + '</li>' +
+                        '<li>subscriptions_url: ' + people[i].subscriptions_url + '</li>' +
+
+                        '<li>organizations_url: ' + people[i].organizations_url+ '</li>' +
+                        '<li>Login: ' + people[i].login + '</li>' +
+                        '</ul>' +
+                        '</div>';
+                }
+                document.getElementById("myId").innerHTML = output;
+            };
+        }
+    </script>
+</body>
+</html>
